@@ -1,0 +1,122 @@
+<style>
+    body {
+  background: #000;
+  color: #fff;
+  font-family: sans-serif;
+  text-align: center;
+}
+
+.skill__circles {
+  padding: 50px 0;
+}
+
+.circle {
+  position: relative;
+  width: 140px;
+  height: 140px;
+  margin: 20px auto;
+}
+
+.circle canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.circle strong {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 24px;
+  font-weight: bold;
+  color: white;
+}
+
+.circle span {
+  display: block;
+  margin-top: 20px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+
+</style>>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Skills Circle</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="skill__circles">
+  <div class="container">
+    <div class="row text-center">
+      <div class="col-sm-6 col-lg-3">
+        <div class="circle" data-percent="60">
+          <canvas width="140" height="140"></canvas>
+          <strong>60<i>%</i></strong>
+          <span>Branding Design</span>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-3">
+        <div class="circle" data-percent="70">
+          <canvas width="140" height="140"></canvas>
+          <strong>70<i>%</i></strong>
+          <span>UI & UX Design</span>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-3">
+        <div class="circle" data-percent="30">
+          <canvas width="140" height="140"></canvas>
+          <strong>30<i>%</i></strong>
+          <span>Web Design</span>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-3">
+        <div class="circle" data-percent="90">
+          <canvas width="140" height="140"></canvas>
+          <strong>90<i>%</i></strong>
+          <span>Illustration</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="script.js">
+    document.addEventListener("DOMContentLoaded", function () {
+  const circles = document.querySelectorAll(".circle");
+
+  circles.forEach((circle) => {
+    const percent = parseInt(circle.getAttribute("data-percent"));
+    const canvas = circle.querySelector("canvas");
+    const ctx = canvas.getContext("2d");
+    const radius = canvas.width / 2 - 10;
+    const center = canvas.width / 2;
+    const startAngle = -Math.PI / 2;
+    const endAngle = startAngle + (percent / 100) * 2 * Math.PI;
+
+    // Background circle (gray/white)
+    ctx.lineWidth = 8;
+    ctx.strokeStyle = "#fff";
+    ctx.beginPath();
+    ctx.arc(center, center, radius, 0, 2 * Math.PI);
+    ctx.stroke();
+
+    // Foreground circle (green)
+    ctx.strokeStyle = "#00FF66"; // green color
+    ctx.beginPath();
+    ctx.arc(center, center, radius, startAngle, endAngle);
+    ctx.stroke();
+  });
+});
+
+</script>
+
+</body>
+</html>
+
